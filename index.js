@@ -127,6 +127,9 @@ const DisplayController = (function () {
 				const div = document.createElement("div");
 				div.textContent = board[i][j];
 				gameboardContainer.appendChild(div);
+				div.addEventListener("click", () => {
+					game.playRound(i, j);
+				});
 			}
 		}
 	})();
@@ -138,7 +141,7 @@ const DisplayController = (function () {
 			j = 0;
 		for (const cell of cells) {
 			cell.textContent = board[i][j];
-			if (j < 3) j++;
+			if (j < 2) j++;
 			else {
 				i++;
 				j = 0;
@@ -149,8 +152,8 @@ const DisplayController = (function () {
 })();
 
 const game = GameController();
-game.playRound(1, 0);
+/* game.playRound(1, 0);
 game.playRound(1, 0);
 game.playRound(0, 0);
 game.playRound(0, 0);
-game.playRound(2, 0);
+game.playRound(2, 0); */
