@@ -2,8 +2,10 @@ const Gameboard = (function () {
 	const rows = 3,
 		columns = 3;
 	let board;
+	let markerCount = 0;
 	const resetBoard = () => {
 		board = [];
+		markerCount = 0;
 		for (let i = 0; i < rows; i++) {
 			board[i] = [];
 			for (let j = 0; j < columns; j++) {
@@ -15,6 +17,7 @@ const Gameboard = (function () {
 	resetBoard();
 
 	const getBoard = () => board;
+	const getMarkerCount = () => markerCount;
 	const placeMarker = (player, row, column) => {
 		if (board[row][column].getMarker() !== "") {
 			DisplayController.displayAlert(
@@ -22,13 +25,20 @@ const Gameboard = (function () {
 			);
 		} else {
 			board[row][column].addMarker(player.marker);
+			markerCount++;
 		}
 	};
 
 	const getBoardWithMarkers = () =>
 		board.map((row) => row.map((cell) => cell.getMarker()));
 
-	return { getBoard, placeMarker, getBoardWithMarkers, resetBoard };
+	return {
+		getBoard,
+		placeMarker,
+		getBoardWithMarkers,
+		resetBoard,
+		getMarkerCount,
+	};
 })();
 
 function Cell() {
@@ -101,6 +111,10 @@ function GameController(
 			DisplayController.displayAlert(
 				`${getActivePlayer().name} wins the game!`
 			);
+			gameOver = true;
+			return;
+		} else if (Gameboard.getMarkerCount() === 9) {
+			DisplayController.displayAlert("Tie!");
 			gameOver = true;
 			return;
 		}
