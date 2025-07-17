@@ -1,13 +1,18 @@
 const Gameboard = (function () {
-	let board = [];
 	const rows = 3,
 		columns = 3;
-	for (let i = 0; i < rows; i++) {
-		board[i] = [];
-		for (let j = 0; j < columns; j++) {
-			board[i].push(Cell());
+	let board;
+	const resetBoard = () => {
+		board = [];
+		for (let i = 0; i < rows; i++) {
+			board[i] = [];
+			for (let j = 0; j < columns; j++) {
+				board[i].push(Cell());
+			}
 		}
-	}
+	};
+
+	resetBoard();
 
 	const getBoard = () => board;
 	const placeMarker = (player, row, column) => {
@@ -23,7 +28,7 @@ const Gameboard = (function () {
 	const getBoardWithMarkers = () =>
 		board.map((row) => row.map((cell) => cell.getMarker()));
 
-	return { getBoard, placeMarker, getBoardWithMarkers };
+	return { getBoard, placeMarker, getBoardWithMarkers, resetBoard };
 })();
 
 function Cell() {
@@ -171,10 +176,14 @@ const createGame = (function () {
 		modal.close();
 		openButton.hidden = true;
 		resetButton.hidden = false;
+		game = GameController(playerOne.value, playerTwo.value);
 		resetButton.addEventListener("click", () => {
 			game = GameController(playerOne.value, playerTwo.value);
+			Gameboard.resetBoard();
+			DisplayController.updateGameboard();
+			DisplayController.displayAlert();
+			console.log(game);
 		});
-		game = GameController(playerOne.value, playerTwo.value);
 	});
 })();
 
