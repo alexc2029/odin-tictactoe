@@ -9,5 +9,25 @@
 	</head>
 	<body>
 		<div class="gameboard-container"></div>
+		<p class="turn"></p>
+		<p class="alert"></p>
+
+		<button data-open-modal>New Game</button>
+		<button id="reset-game">Reset Game</button>
+		<dialog data-modal>
+			<form id="chooseNames">
+				<div>
+					<label for="player-one">Player one</label>
+					<input type="text" id="player-one" name="player-one-name" />
+				</div>
+				<div>
+					<label for="player-two">Player two</label>
+					<input type="text" id="player-two" name="player-two-name" />
+				</div>
+				<div>
+					<button type="submit">New Game</button>
+				</div>
+			</form>
+		</dialog>
 	</body>
 </html>

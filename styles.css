@@ -10,3 +10,8 @@
 	place-content: center;
 	text-align: center;
 }
+
+form {
+	display: grid;
+	row-gap: 15px;
+}
