@@ -50,6 +50,7 @@ function GameController(
 	];
 
 	let activePlayer = players[0];
+	let gameOver = false;
 
 	const switchPlayerTurn = () => {
 		activePlayer = activePlayer === players[0] ? players[1] : players[0];
@@ -89,6 +90,10 @@ function GameController(
 	};
 
 	const playRound = (row, column) => {
+		if (gameOver == true) {
+			console.log("Game is already over!");
+			return;
+		}
 		console.log(
 			`Placing ${getActivePlayer().name}'s ${
 				getActivePlayer().marker
@@ -96,10 +101,10 @@ function GameController(
 		);
 
 		Gameboard.placeMarker(getActivePlayer(), row, column);
-		const winner =
-			checkWinner() == players[0].marker ? players[0] : players[1];
-		if (winner) {
-			console.log(`${winner.name} wins the game!`);
+		DisplayController.updateGameboard();
+		if (checkWinner() != undefined) {
+			console.log(`${getActivePlayer().name} wins the game!`);
+			gameOver = true;
 			return;
 		}
 
@@ -111,6 +116,37 @@ function GameController(
 
 	return { playRound, getActivePlayer };
 }
+
+const DisplayController = (function () {
+	const gameboardContainer = document.querySelector(".gameboard-container");
+	//renderGameboard
+	(() => {
+		const board = Gameboard.getBoardWithMarkers();
+		for (let i = 0; i < board.length; i++) {
+			for (let j = 0; j < board.length; j++) {
+				const div = document.createElement("div");
+				div.textContent = board[i][j];
+				gameboardContainer.appendChild(div);
+			}
+		}
+	})();
+	const cells = document.querySelectorAll("div.gameboard-container > div");
+	const updateGameboard = () => {
+		const board = Gameboard.getBoardWithMarkers();
+
+		let i = 0,
+			j = 0;
+		for (const cell of cells) {
+			cell.textContent = board[i][j];
+			if (j < 3) j++;
+			else {
+				i++;
+				j = 0;
+			}
+		}
+	};
+	return { updateGameboard };
+})();
 
 const game = GameController();
 game.playRound(1, 0);
