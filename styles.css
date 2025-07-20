@@ -1,17 +1,98 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+}
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+p {
+	text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
+}
+ul {
+	list-style-type: none;
+}
+
 .gameboard-container {
 	display: grid;
-	grid-template-columns: repeat(3, 50px);
-	grid-template-rows: repeat(3, 50px);
+	grid-template-columns: repeat(3, 100px);
+	grid-template-rows: repeat(3, 100px);
 	gap: 2px;
+	font-size: 30px;
 }
 
 .gameboard-container > div {
-	outline: 2px solid black;
+	outline: 2px solid gray;
 	place-content: center;
 	text-align: center;
+	&:hover {
+		background-color: #222222;
+	}
+	&:active {
+		background-color: #3b3b3b;
+		transform: translateY(2px);
+	}
 }
 
 form {
 	display: grid;
 	row-gap: 15px;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	row-gap: 10px;
+	height: 100vh;
+	background-color: black;
+	color: white;
+}
+
+dialog {
+	background-color: black;
+	color: white;
+}
+
+button {
+	background-color: gray;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	padding: 5px 15px;
 }
