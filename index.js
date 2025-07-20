@@ -174,24 +174,24 @@ const DisplayController = (function () {
 })();
 
 const createGame = (function () {
-	const openButton = document.querySelector("[data-open-modal]");
-	const resetButton = document.getElementById("reset-game");
-	resetButton.hidden = "true";
-	const modal = document.querySelector("[data-modal]");
+	const newGameOpenButton = document.querySelector("[data-open-modal]");
+	const resetGameButton = document.getElementById("reset-game");
+	resetGameButton.hidden = "true";
+	const newGameModal = document.querySelector("[data-modal]");
 	const newGameForm = document.getElementById("chooseNames");
-	openButton.addEventListener("click", () => {
-		modal.showModal();
+	newGameOpenButton.addEventListener("click", () => {
+		newGameModal.showModal();
 	});
 	newGameForm.addEventListener("submit", (e) => {
 		e.preventDefault();
 		let playerOne = document.getElementById("player-one");
 		let playerTwo = document.getElementById("player-two");
 
-		modal.close();
-		openButton.hidden = true;
-		resetButton.hidden = false;
+		newGameModal.close();
+		newGameOpenButton.hidden = true;
+		resetGameButton.hidden = false;
 		game = GameController(playerOne.value, playerTwo.value);
-		resetButton.addEventListener("click", () => {
+		resetGameButton.addEventListener("click", () => {
 			game = GameController(playerOne.value, playerTwo.value);
 			Gameboard.resetBoard();
 			DisplayController.updateGameboard();
