@@ -87,6 +87,8 @@ body {
 dialog {
 	background-color: black;
 	color: white;
+	margin: auto;
+	margin-bottom: 100px;
 }
 
 button {
