@@ -176,7 +176,7 @@ const DisplayController = (function () {
 const createGame = (function () {
 	const newGameOpenButton = document.querySelector("[data-open-modal]");
 	const resetGameButton = document.getElementById("reset-game");
-	resetGameButton.hidden = "true";
+	resetGameButton.hidden = true;
 	const newGameModal = document.querySelector("[data-modal]");
 	const newGameForm = document.getElementById("chooseNames");
 	newGameOpenButton.addEventListener("click", () => {
@@ -196,7 +196,6 @@ const createGame = (function () {
 			Gameboard.resetBoard();
 			DisplayController.updateGameboard();
 			DisplayController.displayAlert();
-			console.log(game);
 		});
 	});
 })();
